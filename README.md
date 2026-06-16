@@ -30,7 +30,7 @@ columbia-gs-enrollment-analysis/
 ---
 
 ## What This Covers 
-
+|---|---|
 | SQL — stored procedures, functions, views | `02_stored_procedures_views.sql` — 3 SPs, 3 views |
 | Relational database design | `01_schema.sql` — normalized schema, FK constraints, indexes |
 | Python reporting | `generate_and_analyze.py` — data gen + matplotlib analysis |
