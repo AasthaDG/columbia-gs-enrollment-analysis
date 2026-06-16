@@ -29,10 +29,8 @@ columbia-gs-enrollment-analysis/
 
 ---
 
-## What This Covers (Mapped to the JD)
+## What This Covers 
 
-| JD Requirement | What's Here |
-|---|---|
 | SQL — stored procedures, functions, views | `02_stored_procedures_views.sql` — 3 SPs, 3 views |
 | Relational database design | `01_schema.sql` — normalized schema, FK constraints, indexes |
 | Python reporting | `generate_and_analyze.py` — data gen + matplotlib analysis |
@@ -76,4 +74,4 @@ SELECT * FROM flag_stale_applications(30);
 
 ---
 
-*Sample project for the Columbia GS Reporting Analyst role application.*
+
