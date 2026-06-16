@@ -1,1 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Columbia GS — Enrollment Analytics | Aastha Gade</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1C2D4F;
+    --blue:   #75AADB;
+    --gold:   #E8B84B;
+    --coral:  #E07B5A;
+    --green:  #4CAF82;
+    --grey:   #F4F6F9;
+    --mid:    #8A96A3;
+    --white:  #FFFFFF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #EEF2F7;
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 40px 60px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(117,170,219,0.12);
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    max-width: 620px;
+  }
+  header h1 span { color: var(--blue); }
+  .header-sub {
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.6);
+  }
+  .header-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  main { padding: 40px 60px 60px; max-width: 1200px; margin: 0 auto; }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .kpi-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 22px 20px 18px;
+    border-top: 4px solid var(--blue);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .kpi-card.gold  { border-color: var(--gold); }
+  .kpi-card.green { border-color: var(--green); }
+  .kpi-card.coral { border-color: var(--coral); }
+  .kpi-card.navy  { border-color: var(--navy); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mid); font-weight: 600; margin-bottom: 8px; }
+  .kpi-value { font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 700; color: var(--navy); }
+  .kpi-sub   { font-size: 11.5px; color: var(--mid); margin-top: 4px; }
+
+  /* ── SECTION HEADER ── */
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 20px;
+    max-width: 620px;
+    line-height: 1.6;
+  }
+
+  /* ── CHART CARDS ── */
+  .chart-grid {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .chart-grid.two-col { grid-template-columns: 1fr 1fr; }
+  .chart-grid.full    { grid-template-columns: 1fr; }
+
+  .chart-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .chart-card img { width: 100%; height: auto; border-radius: 6px; }
+
+  /* ── INSIGHT BOX ── */
+  .insight-box {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: #F0F5FA;
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-top: 18px;
+  }
+  .insight-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .insight-text { font-size: 13px; color: var(--navy); line-height: 1.65; }
+  .insight-text strong { color: var(--navy); }
+
+  /* ── SQL SECTION ── */
+  .sql-block {
+    background: #0F1923;
+    border-radius: 10px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    margin-top: 14px;
+  }
+  .sql-block pre {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #C9D1D9;
+    white-space: pre;
+  }
+  .kw  { color: #79C0FF; }   /* SQL keywords */
+  .fn  { color: #D2A8FF; }   /* functions */
+  .cm  { color: #5A6370; font-style: italic; }  /* comments */
+  .str { color: #A5D6FF; }   /* strings */
+  .num { color: #F2CC60; }   /* numbers */
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 60px;
+    padding: 28px 60px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  footer strong { color: var(--white); }
+
+  @media (max-width: 768px) {
+    header, main { padding: 24px 20px; }
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .chart-grid.two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="header-eyebrow">Enrollment Analytics · Sample Work</p>
+  <h1>Columbia GS <span>Enrollment Intelligence</span> Dashboard</h1>
+  <p class="header-sub">Funnel analysis · yield rates · demographic reporting · SQL objects</p>
+  <div class="header-meta">
+    <span class="meta-chip">🎓 School of General Studies</span>
+    <span class="meta-chip">📊 5 Terms · 1,200 Applicants</span>
+    <span class="meta-chip">🛠 PostgreSQL · Python · Crystal Reports-ready</span>
+    <span class="meta-chip">👩‍💻 Built by Aastha Gade</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip" style="margin-top:36px;">
+    <div class="kpi-card">
+      <div class="kpi-label">Total Inquiries</div>
+      <div class="kpi-value">1,200</div>
+      <div class="kpi-sub">Across 5 terms</div>
+    </div>
+    <div class="kpi-card gold">
+      <div class="kpi-label">Submitted</div>
+      <div class="kpi-value">923</div>
+      <div class="kpi-sub">76.9% of inquiries</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Admitted</div>
+      <div class="kpi-value">449</div>
+      <div class="kpi-sub">37.4% of inquiries</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Enrolled</div>
+      <div class="kpi-value">266</div>
+      <div class="kpi-sub">22.2% overall conversion</div>
+    </div>
+    <div class="kpi-card coral">
+      <div class="kpi-label">Yield Rate</div>
+      <div class="kpi-value">59.2%</div>
+      <div class="kpi-sub">Enrolled / Admitted</div>
+    </div>
+  </div>
+
+  <!-- FUNNEL -->
+  <div class="section-label">Funnel Analysis</div>
+  <div class="section-title">Where Are We Losing Applicants?</div>
+  <p class="section-desc">Stage-by-stage conversion across all terms. The largest drop-off occurs between Inquiry → Submission (277 lost), suggesting an opportunity to improve early engagement and application support for nontraditional students.</p>
+
+  <div class="chart-grid full">
+    <div class="chart-card">
+      <img src="01_funnel.png" alt="Enrollment Funnel Chart" />
+      <div class="insight-box">
+        <span class="insight-icon">💡</span>
+        <p class="insight-text">
+          <strong>Key finding:</strong> The Inquiry → Submission drop (23%) is the funnel's biggest leak.
+          For GS's nontraditional population — first-gen, working adults, veterans — this may reflect
+          application complexity or lack of advisor touchpoints early in the process.
+          A targeted intervention here could meaningfully move the yield needle.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- YIELD + TREND -->
+  <div class="section-label" style="margin-top:36px;">Program & Term Analysis</div>
+  <div class="section-title">Yield by Program · Term Trend</div>
+  <p class="section-desc">Postbaccalaureate leads in yield (70%); Science Certificate trails at 52%. Fall terms consistently outperform Spring in raw enrollment volume.</p>
+
+  <div class="chart-grid two-col">
+    <div class="chart-card">
+      <img src="02_yield_by_program.png" alt="Yield Rate by Program" />
+      <div class="insight-box">
+        <span class="insight-icon">📌</span>
+        <p class="insight-text">
+          <strong>Science Certificate at 52%</strong> — nearly 20 pts below Postbaccalaureate.
+          Worth investigating whether admitted students are choosing competing programs or
+          deferring enrollment due to financial aid gaps.
+        </p>
+      </div>
+    </div>
+    <div class="chart-card">
+      <img src="03_term_trend.png" alt="Term-over-Term Enrollment Trend" />
+      <div class="insight-box">
+        <span class="insight-icon">📈</span>
+        <p class="insight-text">
+          Fall 2024 shows the highest submission volume, but admitted-to-enrolled
+          conversion is flat vs. Fall 2023 — suggesting the funnel top is growing
+          but yield work remains ongoing.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEMOGRAPHICS -->
+  <div class="section-label" style="margin-top:36px;">Mission Alignment</div>
+  <div class="section-title">Who We're Actually Enrolling</div>
+  <p class="section-desc">GS's mission is access. These breakdowns track whether enrollment outcomes reflect that — essential for reporting to deans and external stakeholders.</p>
+
+  <div class="chart-grid full">
+    <div class="chart-card">
+      <img src="04_demographics.png" alt="Demographic Breakdown of Enrolled Students" />
+      <div class="insight-box">
+        <span class="insight-icon">🎯</span>
+        <p class="insight-text">
+          <strong>42% of enrolled students are transfer students</strong> — the single largest segment.
+          First-gen representation sits at 32%, consistent with GS's mission.
+          Veteran enrollment (8%) could be a growth area worth targeting with dedicated outreach.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SQL SHOWCASE -->
+  <div class="section-label" style="margin-top:44px;">Technical Reference</div>
+  <div class="section-title">Sample SQL — Stored Procedure</div>
+  <p class="section-desc">
+    One of three stored procedures built for this project. <code>get_funnel_drop_off()</code>
+    computes stage-to-stage attrition for any term — designed to feed Crystal Reports,
+    ad-hoc Excel exports, or Slate-connected dashboards.
+  </p>
+
+  <div class="chart-card">
+    <div class="sql-block"><pre><span class="cm">-- Returns stage-to-stage drop-off for a given term code</span>
+<span class="cm">-- Usage: SELECT * FROM get_funnel_drop_off('Fall2024');</span>
+
+<span class="kw">CREATE OR REPLACE FUNCTION</span> <span class="fn">get_funnel_drop_off</span>(p_term_code <span class="kw">VARCHAR</span>)
+<span class="kw">RETURNS TABLE</span> (
+    stage_from      <span class="kw">TEXT</span>,
+    stage_to        <span class="kw">TEXT</span>,
+    count_from      <span class="kw">BIGINT</span>,
+    count_to        <span class="kw">BIGINT</span>,
+    drop_off_count  <span class="kw">BIGINT</span>,
+    drop_off_pct    <span class="kw">NUMERIC</span>
+)
+<span class="kw">LANGUAGE</span> plpgsql <span class="kw">AS</span> $$
+<span class="kw">DECLARE</span>
+    v_term_id <span class="kw">INT</span>;
+<span class="kw">BEGIN</span>
+    <span class="kw">SELECT</span> term_id <span class="kw">INTO</span> v_term_id
+    <span class="kw">FROM</span> terms <span class="kw">WHERE</span> term_code = p_term_code;
+
+    <span class="kw">IF</span> v_term_id <span class="kw">IS NULL THEN</span>
+        <span class="fn">RAISE EXCEPTION</span> <span class="str">'Term code % not found'</span>, p_term_code;
+    <span class="kw">END IF</span>;
+
+    <span class="kw">RETURN QUERY</span>
+    <span class="kw">WITH</span> stage_counts <span class="kw">AS</span> (
+        <span class="kw">SELECT</span> fe.stage,
+               <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> fe.application_id) <span class="kw">AS</span> cnt,
+               <span class="kw">CASE</span> fe.stage
+                   <span class="kw">WHEN</span> <span class="str">'Inquiry'</span>               <span class="kw">THEN</span> <span class="num">1</span>
+                   <span class="kw">WHEN</span> <span class="str">'Application Submitted'</span>  <span class="kw">THEN</span> <span class="num">3</span>
+                   <span class="kw">WHEN</span> <span class="str">'Admitted'</span>              <span class="kw">THEN</span> <span class="num">7</span>
+                   <span class="kw">WHEN</span> <span class="str">'Enrolled'</span>              <span class="kw">THEN</span> <span class="num">8</span>
+               <span class="kw">END AS</span> stage_order
+        <span class="kw">FROM</span> funnel_events fe
+        <span class="kw">JOIN</span> applications a <span class="kw">ON</span> fe.application_id = a.application_id
+        <span class="kw">WHERE</span> a.term_id = v_term_id
+        <span class="kw">GROUP BY</span> fe.stage
+    ),
+    ranked <span class="kw">AS</span> (
+        <span class="kw">SELECT</span> stage, cnt, stage_order,
+               <span class="fn">LEAD</span>(stage) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> stage_order) <span class="kw">AS</span> next_stage,
+               <span class="fn">LEAD</span>(cnt)   <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> stage_order) <span class="kw">AS</span> next_cnt
+        <span class="kw">FROM</span> stage_counts
+    )
+    <span class="kw">SELECT</span> r.stage::TEXT, r.next_stage::TEXT,
+           r.cnt, r.next_cnt,
+           (r.cnt - r.next_cnt),
+           <span class="fn">ROUND</span>((r.cnt - r.next_cnt) * <span class="num">100.0</span> / <span class="fn">NULLIF</span>(r.cnt, <span class="num">0</span>), <span class="num">2</span>)
+    <span class="kw">FROM</span> ranked r
+    <span class="kw">WHERE</span> r.next_stage <span class="kw">IS NOT NULL</span>
+    <span class="kw">ORDER BY</span> r.stage_order;
+<span class="kw">END</span>;
+$$;</pre></div>
+    <div class="insight-box" style="margin-top:16px;">
+      <span class="insight-icon">🔍</span>
+      <p class="insight-text">
+        Full schema (normalized, indexed), two additional stored procedures
+        (<code>get_term_enrollment_report</code>, <code>flag_stale_applications</code>),
+        and three reporting views are in <code>/sql/</code> on the GitHub repo.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div>
+    Built by <strong>Aastha Gade</strong> &nbsp;·&nbsp;
+    <a href="mailto:aastha.rdg@gmail.com">aastha.rdg@gmail.com</a> &nbsp;·&nbsp;
+    <a href="https://linkedin.com/in/aastha-gade-0086a1237">LinkedIn</a>
+  </div>
+  <div>Sample project · Columbia GS Reporting Analyst role · Mock data only</div>
+</footer>
+
+</body>
+</html>
