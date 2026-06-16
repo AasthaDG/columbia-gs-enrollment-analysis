@@ -30,6 +30,7 @@ columbia-gs-enrollment-analysis/
 ---
 
 ## What This Covers 
+| TeckStack | What's Here |
 |---|---|
 | SQL — stored procedures, functions, views | `02_stored_procedures_views.sql` — 3 SPs, 3 views |
 | Relational database design | `01_schema.sql` — normalized schema, FK constraints, indexes |
